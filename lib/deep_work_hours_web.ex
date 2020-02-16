@@ -24,6 +24,8 @@ defmodule DeepWorkHoursWeb do
       import Plug.Conn
       import DeepWorkHoursWeb.Gettext
       alias DeepWorkHoursWeb.Router.Helpers, as: Routes
+
+      import Phoenix.LiveView.Controller
     end
   end
 
@@ -42,6 +44,8 @@ defmodule DeepWorkHoursWeb do
       import DeepWorkHoursWeb.ErrorHelpers
       import DeepWorkHoursWeb.Gettext
       alias DeepWorkHoursWeb.Router.Helpers, as: Routes
+
+      import Phoenix.LiveView.Helpers
     end
   end
 
@@ -50,6 +54,7 @@ defmodule DeepWorkHoursWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
