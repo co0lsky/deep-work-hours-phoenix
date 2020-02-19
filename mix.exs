@@ -44,7 +44,8 @@ defmodule DeepWorkHours.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.7.0"},
-      {:floki, ">= 0.0.0", only: :test}
+      {:floki, ">= 0.0.0", only: :test},
+      {:tzdata, "~> 1.0.1"}
     ]
   end
 

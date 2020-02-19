@@ -9,12 +9,7 @@ defmodule DeepWorkHoursWeb.TimerLive do
   end
 
   def mount(_params, %{}, socket) do
-    current_time = ~T[00:00:00]
-
-    {:ok, socket
-               |> assign(:current_time, current_time)
-               |> assign(:playing, false)
-    }
+    {:ok, reset_timer socket}
   end
 
   def handle_info(:update, socket) do
@@ -27,8 +22,10 @@ defmodule DeepWorkHoursWeb.TimerLive do
 
   def handle_event("start", _params, socket) do
     {:ok, time_ref} = :timer.send_interval(1000, self(), :update)
+    {:ok, start_time} = DateTime.now("Etc/UTC")
 
     {:noreply, socket
+               |> assign(:start_time, start_time)
                |> assign(:time_ref, time_ref)
                |> assign(:playing, true)
     }
@@ -37,8 +34,32 @@ defmodule DeepWorkHoursWeb.TimerLive do
   def handle_event("stop", _params, socket) do
     :timer.cancel(socket.assigns.time_ref)
 
-    {:noreply, socket
-               |> assign(:playing, false)
+    save_timer_entry socket
+
+    {:noreply, reset_timer socket}
+  end
+
+  def terminate(reason, socket) do
+
+  end
+
+  defp reset_timer(socket) do
+    current_time = ~T[00:00:00]
+
+    socket
+    |> assign(:current_time, current_time)
+    |> assign(:playing, false)
+  end
+
+  defp save_timer_entry(socket) do
+    {:ok, end_time} = DateTime.now("Etc/UTC")
+
+    time_entry = %DeepWorkHours.TimeEntry{
+      start_date_time: DateTime.truncate(socket.assigns.start_time, :second),
+      end_date_time: DateTime.truncate(end_time, :second),
+      total_time: socket.assigns.current_time
     }
+
+    DeepWorkHours.Repo.insert time_entry
   end
 end

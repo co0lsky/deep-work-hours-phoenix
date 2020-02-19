@@ -7,6 +7,12 @@
 # General application configuration
 use Mix.Config
 
+config :deep_work_hours, DeepWorkHours.Repo,
+  database: "deep_work_hours_repo",
+  username: "postgres",
+  password: "postgres",
+  hostname: "localhost"
+
 config :deep_work_hours,
   ecto_repos: [DeepWorkHours.Repo]
 
@@ -25,6 +31,9 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+# Use Tzdata for timezone
+config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
