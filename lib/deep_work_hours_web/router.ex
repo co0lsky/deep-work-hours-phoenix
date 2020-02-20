@@ -1,6 +1,8 @@
 defmodule DeepWorkHoursWeb.Router do
   use DeepWorkHoursWeb, :router
 
+  require Ueberauth
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -13,10 +15,19 @@ defmodule DeepWorkHoursWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", DeepWorkHoursWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+  end
+
   scope "/", DeepWorkHoursWeb do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/logout", AuthController, :logout
   end
 
   # Other scopes may use custom stacks.

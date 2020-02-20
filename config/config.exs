@@ -35,6 +35,18 @@ config :phoenix, :json_library, Jason
 # Use Tzdata for timezone
 config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 
+# Configures Ueberauth
+config :ueberauth, Ueberauth,
+  providers: [
+    auth0: { Ueberauth.Strategy.Auth0, [] },
+  ]
+
+# Configures Ueberauth's Auth0 auth provider
+config :ueberauth, Ueberauth.Strategy.Auth0.OAuth,
+  domain: "dev-9ulkbitr.au.auth0.com",
+  client_id: "AXO8aZvsYsKhKKisUOwkWlR9orqUnD4c",
+  client_secret: "Lm9Jr1ENqGlN8FhOtYYea_T3mQEjSX2FN7U8DsREeh9X24lQqd7UMxqSis1Cz6b4"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"

@@ -20,7 +20,7 @@ defmodule DeepWorkHours.MixProject do
   def application do
     [
       mod: {DeepWorkHours.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:ueberauth, :ueberauth_auth0, :logger, :runtime_tools, :timex],
     ]
   end
 
@@ -44,8 +44,12 @@ defmodule DeepWorkHours.MixProject do
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:phoenix_live_view, "~> 0.7.0"},
+      {:poison, "~> 3.1"},
       {:floki, ">= 0.0.0", only: :test},
-      {:tzdata, "~> 1.0.1"}
+      {:timex, "~> 3.0"},
+      {:tzdata, "~> 1.0.1"},
+      {:ueberauth, "~> 0.4"},
+      {:ueberauth_auth0, "~> 0.3"}
     ]
   end
 

@@ -8,8 +8,15 @@ defmodule DeepWorkHoursWeb.TimerLive do
     Phoenix.View.render(DeepWorkHoursWeb.PageView, "timer.html", assigns)
   end
 
-  def mount(_params, %{}, socket) do
-    {:ok, reset_timer socket}
+#  def mount(_params, %{}, socket) do
+#    {:ok, reset_timer socket}
+#  end
+
+  def mount(_params, %{"current_user" => current_user}, socket) do
+    {:ok, socket
+          |> reset_timer
+          |> assign(:current_user, current_user)
+    }
   end
 
   def handle_info(:update, socket) do
@@ -58,7 +65,8 @@ defmodule DeepWorkHoursWeb.TimerLive do
       date: Date.utc_today(),
       start_date_time: DateTime.truncate(socket.assigns.start_time, :second),
       end_date_time: DateTime.truncate(end_time, :second),
-      total_time: socket.assigns.current_time
+      total_time: socket.assigns.current_time,
+      uid: socket.assigns.current_user.id
     }
 
     DeepWorkHours.Repo.insert time_entry

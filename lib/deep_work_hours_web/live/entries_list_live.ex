@@ -8,10 +8,11 @@ defmodule DeepWorkHoursWeb.EntriesListLive do
     Phoenix.View.render(DeepWorkHoursWeb.PageView, "entries_list.html", assigns)
   end
 
-  def mount(_params, %{}, socket) do
+  def mount(_params, %{"current_user" => current_user}, socket) do
     entries = DeepWorkHours.Repo.all(
                 from(
                   t in DeepWorkHours.TimeEntry,
+                  where: t.uid == ^current_user.id,
                   group_by: t.date,
                   select: %{day: t.date, total: sum(t.total_time)}
                 )
