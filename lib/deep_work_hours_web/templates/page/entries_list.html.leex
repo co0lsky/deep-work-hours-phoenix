@@ -1,0 +1,12 @@
+<div>
+  <%= for entry <- @entries do %>
+  <div class="flex mx-auto h-24 mb-2">
+    <div class="w-3/12 font-semibold self-center">
+      <span class="text-gray-700"><%= entry.day %></span>
+    </div>
+    <div class="w-9/12 px-4 text-center self-center bg-gray-100 shadow">
+      <span class="text-5xl text-gray-700"><%= entry.total %></span>
+    </div>
+  </div>
+  <%  end %>
+</div>

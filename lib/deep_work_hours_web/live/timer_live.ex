@@ -55,6 +55,7 @@ defmodule DeepWorkHoursWeb.TimerLive do
     {:ok, end_time} = DateTime.now("Etc/UTC")
 
     time_entry = %DeepWorkHours.TimeEntry{
+      date: Date.utc_today(),
       start_date_time: DateTime.truncate(socket.assigns.start_time, :second),
       end_date_time: DateTime.truncate(end_time, :second),
       total_time: socket.assigns.current_time
