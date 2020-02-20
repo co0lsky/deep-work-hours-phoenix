@@ -30,6 +30,10 @@ defmodule DeepWorkHoursWeb.EntriesListLive do
       |> elem(1)
       |> Time.truncate(:second)
 
-    %{day: entry.day, total: total}
+    day = entry.day
+          |> Timex.Format.DateTime.Formatters.Relative.format("{relative}")
+          |> elem(1)
+
+    %{day: day, total: total}
   end
 end
