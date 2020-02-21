@@ -10,7 +10,7 @@ defmodule DeepWorkHoursWeb.AuthController do
     conn
     |> put_flash(:info, "You have been logged out!")
     |> configure_session(drop: true)
-    |> redirect(to: "/")
+    |> redirect(to: "/landing")
   end
 
   def callback(%{assigns: %{ueberauth_failure: _fails}} = conn, _params) do

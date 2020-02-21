@@ -3,6 +3,8 @@ defmodule DeepWorkHoursWeb.Router do
 
   require Ueberauth
 
+  import DeepWorkHoursWeb.AuthPlug
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
@@ -15,6 +17,14 @@ defmodule DeepWorkHoursWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug DeepWorkHoursWeb.AuthPlug
+  end
+
+  pipeline :landing do
+    plug :put_layout, {DeepWorkHoursWeb.LayoutView, "landing.html"}
+  end
+
   scope "/auth", DeepWorkHoursWeb do
     pipe_through :browser
 
@@ -23,8 +33,14 @@ defmodule DeepWorkHoursWeb.Router do
     post "/:provider/callback", AuthController, :callback
   end
 
+  scope "/landing", DeepWorkHoursWeb do
+    pipe_through [:browser, :landing]
+
+    get "/", LandingController, :index
+  end
+
   scope "/", DeepWorkHoursWeb do
-    pipe_through :browser
+    pipe_through [:browser, :auth]
 
     get "/", PageController, :index
     get "/logout", AuthController, :logout

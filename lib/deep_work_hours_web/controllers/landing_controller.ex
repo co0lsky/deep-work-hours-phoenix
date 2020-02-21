@@ -1,4 +1,4 @@
-defmodule DeepWorkHoursWeb.PageController do
+defmodule DeepWorkHoursWeb.LandingController do
   use DeepWorkHoursWeb, :controller
 
   def index(conn, _params) do
