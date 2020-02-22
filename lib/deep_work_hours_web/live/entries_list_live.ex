@@ -33,8 +33,7 @@ defmodule DeepWorkHoursWeb.EntriesListLive do
       |> Time.truncate(:second)
 
     day = entry.day
-          |> Timex.Format.DateTime.Formatters.Relative.format("{relative}")
-          |> elem(1)
+          |> DeepWorkHoursWeb.DateHelper.human_readable()
 
     %{day: day, total: total}
   end
