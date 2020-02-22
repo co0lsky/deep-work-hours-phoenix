@@ -1,11 +1,25 @@
-<div>
+<div class="flex flex-col">
   <%= for entry <- @entries do %>
-  <div class="flex mx-auto h-24 mb-2">
-    <div class="w-3/12 font-semibold self-center">
-      <span class="text-gray-700"><%= entry.day %></span>
+  <div class="text-white bg-gray-600 px-2">
+    <%= entry.day %>
+  </div>
+  <div class="flex flex-row h-24 bg-gray-100 shadow rounded my-2 mx-2">
+    <div class="w-1/2 lg:w-7/12 flex-col text-left">
+      <div class="text-gray-500 px-4 pt-2 m-2">What's up</div>
+      <div class="text-gray-700 px-4 pb-2 m-2">Project name</div>
     </div>
-    <div class="w-9/12 px-4 text-center self-center bg-gray-100 shadow">
-      <span class="text-5xl text-gray-700"><%= entry.total %></span>
+    <div class="w-1/2 lg:w-5/12 flex flex-row-reverse text-center">
+      <div class="w-1/3 py-2 m-2 self-center">
+        <button
+            class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border-blue-500 hover:border-transparent rounded py-2 px-2 uppercase"
+          phx-click="repeat"
+        >
+        Play
+        </button>
+      </div>
+      <div class="text-gray-700 text-xl py-2 m-2 self-center">
+        <%= entry.total %>
+      </div>
     </div>
   </div>
   <%  end %>

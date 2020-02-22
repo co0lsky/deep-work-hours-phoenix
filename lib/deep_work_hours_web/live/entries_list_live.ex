@@ -14,6 +14,7 @@ defmodule DeepWorkHoursWeb.EntriesListLive do
                   t in DeepWorkHours.TimeEntry,
                   where: t.uid == ^current_user.id,
                   group_by: t.date,
+                  order_by: [desc: t.date],
                   select: %{day: t.date, total: sum(t.total_time)}
                 )
               )

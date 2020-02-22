@@ -1,20 +1,25 @@
-<p class="alert alert-info" role="alert"><%= live_flash(@flash, :info) %></p>
-<div class="flex mx-auto h-24 bg-gray-100 shadow">
-  <div class="w-7/12 px-4 text-right">
-    <span class="text-6xl text-gray-700"><%= @current_time %></span>
+<div class="flex mx-auto h-24 bg-gray-100 shadow rounded">
+  <div class="w-1/2 lg:w-7/12 flex-col text-left">
+    <div class="text-gray-500 px-4 pt-2 m-2">What's up</div>
+    <div class="text-gray-700 px-4 pb-2 m-2">Project name</div>
   </div>
-  <div class="w-5/12 px-4 self-center text-center">
-    <button
-        class="bg-blue-500 hover:bg-blue-700 text-white font-bold rounded py-2 px-4 uppercase <%= if @playing, do: "hidden" %>"
-        phx-click="start"
-    >
+  <div class="w-1/2 lg:w-5/12 flex flex-row-reverse text-center">
+    <div class="w-1/3 py-2 m-2 self-center">
+      <button
+          class="bg-transparent hover:bg-blue-500 text-blue-700 hover:text-white border-blue-500 hover:border-transparent rounded py-2 px-2 uppercase <%= if @playing, do: "hidden" %>"
+      phx-click="start"
+      >
       Play
-    </button>
-    <button
-        class="bg-red-500 hover:bg-red-700 text-white font-bold rounded py-2 px-4 uppercase <%= unless @playing, do: "hidden" %>"
-        phx-click="stop"
-    >
+      </button>
+      <button
+          class="bg-transparent hover:bg-red-500 text-red-700 hover:text-white border-red-500 hover:border-transparent rounded py-2 px-2 uppercase <%= unless @playing, do: "hidden" %>"
+      phx-click="stop"
+      >
       Stop
-    </button>
+      </button>
+    </div>
+    <div class="text-gray-700 text-xl py-2 m-2 self-center">
+      <%= @current_time %>
+    </div>
   </div>
 </div>
