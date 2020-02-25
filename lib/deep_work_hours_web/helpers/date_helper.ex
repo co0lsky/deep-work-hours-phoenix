@@ -11,6 +11,10 @@ defmodule DeepWorkHoursWeb.DateHelper do
 
   defp to_human_readable(0, _), do: "Today"
   defp to_human_readable(1, _), do: "Yesterday"
-  defp to_human_readable(day_diff, _) when day_diff <= 7, do: "#{day_diff} days ago"
-  defp to_human_readable(_, date), do: date
+  defp to_human_readable(_, date),
+       do: Timex.Format.DateTime.Formatter.format(
+             date,
+             "%a, %d %b",
+             Timex.Format.DateTime.Formatters.Strftime)
+           |> elem(1)
 end
