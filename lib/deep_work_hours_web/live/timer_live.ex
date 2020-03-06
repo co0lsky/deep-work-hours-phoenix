@@ -27,6 +27,17 @@ defmodule DeepWorkHoursWeb.TimerLive do
     {:noreply, assign(socket, :current_time, current_time)}
   end
 
+  def handle_event("toggle", _params, socket) do
+    {:ok, time_ref} = :timer.send_interval(1000, self(), :update)
+    {:ok, start_time} = DateTime.now("Etc/UTC")
+
+    {:noreply, socket
+               |> assign(:start_time, start_time)
+               |> assign(:time_ref, time_ref)
+               |> assign(:playing, true)
+    }
+  end
+
   def handle_event("start", _params, socket) do
     {:ok, time_ref} = :timer.send_interval(1000, self(), :update)
     {:ok, start_time} = DateTime.now("Etc/UTC")

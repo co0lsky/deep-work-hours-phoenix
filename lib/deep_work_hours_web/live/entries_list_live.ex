@@ -13,12 +13,12 @@ defmodule DeepWorkHoursWeb.EntriesListLive do
                 from(
                   t in DeepWorkHours.TimeEntry,
                   where: t.uid == ^current_user.id,
-                  group_by: t.date,
+#                  group_by: t.date,
                   order_by: [desc: t.date],
-                  select: %{day: t.date, total: sum(t.total_time)}
+                  select: %{id: t.id, day: t.date, total: t.total_time}
                 )
               )
-              |> Enum.map(fn entry -> transform entry end)
+#              |> Enum.map(fn entry -> transform entry end)
 
     {:ok, socket |> assign(:entries, entries)}
   end
