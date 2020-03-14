@@ -14,27 +14,22 @@ defmodule DeepWorkHoursWeb.EntriesListLive do
                   t in DeepWorkHours.TimeEntry,
                   where: t.uid == ^current_user.id,
 #                  group_by: t.date,
-                  order_by: [desc: t.date],
+                  order_by: [desc: t.id],
                   select: %{id: t.id, day: t.date, total: t.total_time}
                 )
               )
-#              |> Enum.map(fn entry -> transform entry end)
+              |> Enum.map(fn entry -> transform entry end)
 
     {:ok, socket |> assign(:entries, entries)}
   end
 
   defp transform(entry) do
-    total = Time.new(
-      entry.total.days * 24,
-      div(entry.total.secs, 60),
-      rem(entry.total.secs, 60),
-      0)
-      |> elem(1)
-      |> Time.truncate(:second)
+    total = entry.total
+            |> Time.truncate(:second)
 
     day = entry.day
           |> DeepWorkHoursWeb.DateHelper.human_readable()
 
-    %{day: day, total: total}
+    %{id: entry.id, day: day, total: total}
   end
 end
