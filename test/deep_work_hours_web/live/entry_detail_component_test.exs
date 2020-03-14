@@ -3,19 +3,19 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponentTest do
 
     import Phoenix.LiveViewTest
     import DeepWorkHoursWeb.Factory
-  
+
     test "render component", %{conn: _conn} do
         entry = insert!(:entry)
 
         assert render_component(
-            DeepWorkHoursWeb.Components.EntryDetailComponent, 
+            DeepWorkHoursWeb.Components.EntryDetailComponent,
             id: entry.id) =~ "detail-#{entry.id}"
     end
 
     test "toggle detail form", %{conn: conn} do
         entry = insert!(:entry)
 
-        {:ok, view, _html} = 
+        {:ok, view, _html} =
             live_isolated(conn, DeepWorkHoursWeb.EntriesListLive, session: %{"current_user" => %{id: "1"}})
 
         # Show detail
@@ -28,7 +28,7 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponentTest do
     test "save time entry", %{conn: conn} do
         entry = insert!(:entry)
 
-        {:ok, view, _html} = 
+        {:ok, view, _html} =
             live_isolated(conn, DeepWorkHoursWeb.EntriesListLive, session: %{"current_user" => %{id: "1"}})
 
         # Submit form
@@ -56,4 +56,3 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponentTest do
         assert entry.end_date_time == DateTime.from_iso8601("2020-03-05 23:17:00Z") |> elem(1)
     end
 end
-  

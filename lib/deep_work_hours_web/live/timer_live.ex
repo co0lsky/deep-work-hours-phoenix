@@ -57,7 +57,7 @@ defmodule DeepWorkHoursWeb.TimerLive do
     {:noreply, reset_timer socket}
   end
 
-  def terminate(reason, socket) do
+  def terminate(_reason, _socket) do
 
   end
 

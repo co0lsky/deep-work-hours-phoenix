@@ -1,6 +1,9 @@
 defmodule DeepWorkHoursWeb.DateHelper do
   @moduledoc false
 
+  alias Timex.Format.DateTime.Formatter
+  alias Timex.Format.DateTime.Formatters
+
   def human_readable(date) do
     today = Date.utc_today
 
@@ -12,9 +15,9 @@ defmodule DeepWorkHoursWeb.DateHelper do
   defp to_human_readable(0, _), do: "Today"
   defp to_human_readable(1, _), do: "Yesterday"
   defp to_human_readable(_, date),
-       do: Timex.Format.DateTime.Formatter.format(
+       do: Formatter.format(
              date,
              "%a, %d %b",
-             Timex.Format.DateTime.Formatters.Strftime)
+             Formatters.Strftime)
            |> elem(1)
 end

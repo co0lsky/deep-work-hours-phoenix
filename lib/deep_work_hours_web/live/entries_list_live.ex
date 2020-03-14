@@ -1,4 +1,6 @@
 defmodule DeepWorkHoursWeb.EntriesListLive do
+  @moduledoc false
+
   use Phoenix.LiveView
   use Phoenix.HTML
 

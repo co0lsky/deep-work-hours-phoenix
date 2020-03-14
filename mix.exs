@@ -49,7 +49,8 @@ defmodule DeepWorkHours.MixProject do
       {:timex, "~> 3.0"},
       {:tzdata, "~> 1.0.1"},
       {:ueberauth, "~> 0.4"},
-      {:ueberauth_auth0, "~> 0.3"}
+      {:ueberauth_auth0, "~> 0.3"},
+      {:credo, "~> 1.2", only: [:dev, :test], runtime: false}
     ]
   end
 

@@ -1,10 +1,7 @@
 defmodule DeepWorkHoursWeb.AuthController do
   use DeepWorkHoursWeb, :controller
-  alias DeepWorkHoursWeb.Router.Helpers
 
   plug Ueberauth
-
-  alias Ueberauth.Strategy.Helpers
 
   def logout(conn, _params) do
     conn

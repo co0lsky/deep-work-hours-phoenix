@@ -17,6 +17,8 @@ defmodule DeepWorkHoursWeb.ConnCase do
 
   use ExUnit.CaseTemplate
 
+  alias Ecto.Adapters.SQL.Sandbox
+
   using do
     quote do
       # Import conveniences for testing with connections
@@ -29,10 +31,10 @@ defmodule DeepWorkHoursWeb.ConnCase do
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(DeepWorkHours.Repo)
+    :ok = Sandbox.checkout(DeepWorkHours.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(DeepWorkHours.Repo, {:shared, self()})
+      Sandbox.mode(DeepWorkHours.Repo, {:shared, self()})
     end
 
     {:ok, conn: Phoenix.ConnTest.build_conn()}

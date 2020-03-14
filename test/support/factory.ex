@@ -1,8 +1,12 @@
 defmodule DeepWorkHoursWeb.Factory do
+    @moduledoc """
+    Factory to prepare test data
+    """
+
     alias DeepWorkHours.Repo
-  
+
     # Factories
-  
+
     def build(:entry) do
         now_date_time = DateTime.utc_now()
         start_date_time = now_date_time |> DateTime.add((-25 * 60), :second) |> DateTime.truncate(:second)
@@ -16,14 +20,14 @@ defmodule DeepWorkHoursWeb.Factory do
         uid: "1"
       }
     end
-  
+
     # Convenience API
-  
+
     def build(factory_name, attributes) do
       factory_name |> build() |> struct(attributes)
     end
-  
+
     def insert!(factory_name, attributes \\ []) do
       Repo.insert! build(factory_name, attributes)
     end
-  end
+end

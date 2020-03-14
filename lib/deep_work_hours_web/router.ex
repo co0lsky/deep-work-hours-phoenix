@@ -3,8 +3,6 @@ defmodule DeepWorkHoursWeb.Router do
 
   require Ueberauth
 
-  import DeepWorkHoursWeb.AuthPlug
-
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session

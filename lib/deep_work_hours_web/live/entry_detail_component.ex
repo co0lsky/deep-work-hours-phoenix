@@ -1,4 +1,6 @@
 defmodule DeepWorkHoursWeb.Components.EntryDetailComponent do
+  @moduledoc false
+
   use Phoenix.LiveComponent
 
   alias DeepWorkHours.Repo
@@ -37,13 +39,13 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponent do
     |> DeepWorkHours.TimeEntry.changeset(params)
     |> Repo.update
     |> case do
-      {:ok, entry} -> 
-        {:noreply, 
+      {:ok, entry} ->
+        {:noreply,
           socket
           |> assign(:hidden, true)
           |> assign(:entry, DeepWorkHours.TimeEntry.changeset(entry))}
       {:error, %Ecto.Changeset{} = changeset} ->
-        {:noreply, 
+        {:noreply,
           socket
           |> assign(:hidden, true)
           |> assign(:entry, changeset)}
