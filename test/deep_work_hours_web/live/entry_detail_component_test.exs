@@ -7,16 +7,18 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponentTest do
     test "render component", %{conn: _conn} do
         entry = insert!(:entry)
 
-        assert render_component(
-            DeepWorkHoursWeb.Components.EntryDetailComponent,
-            id: entry.id) =~ "detail-#{entry.id}"
+    assert render_component(DeepWorkHoursWeb.Components.EntryDetailComponent,
+             id: entry.id
+           ) =~ "detail-#{entry.id}"
     end
 
     test "toggle detail form", %{conn: conn} do
         entry = insert!(:entry)
 
         {:ok, view, _html} =
-            live_isolated(conn, DeepWorkHoursWeb.EntriesListLive, session: %{"current_user" => %{id: "1"}})
+      live_isolated(conn, DeepWorkHoursWeb.EntriesListLive,
+        session: %{"current_user" => %{id: "1"}}
+      )
 
         # Show detail
         assert render_click([view, "detail-#{entry.id}"], "toggle", %{}) =~ "Time Entry Details"
@@ -29,10 +31,13 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponentTest do
         entry = insert!(:entry)
 
         {:ok, view, _html} =
-            live_isolated(conn, DeepWorkHoursWeb.EntriesListLive, session: %{"current_user" => %{id: "1"}})
+      live_isolated(conn, DeepWorkHoursWeb.EntriesListLive,
+        session: %{"current_user" => %{id: "1"}}
+      )
 
         # Submit form
-        render_submit([view, "detail-#{entry.id}"], "save", %{"time_entry" => %{
+    render_submit([view, "detail-#{entry.id}"], "save", %{
+      "time_entry" => %{
             "end_date_time" => %{
               "day" => "5",
               "hour" => "23",
@@ -47,7 +52,8 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponentTest do
               "month" => "3",
               "year" => "2020"
             }
-          }})
+      }
+    })
 
         # Retrieve updated object
         entry = DeepWorkHours.Repo.get!(DeepWorkHours.TimeEntry, entry.id)

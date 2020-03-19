@@ -20,7 +20,7 @@ defmodule DeepWorkHours.MixProject do
   def application do
     [
       mod: {DeepWorkHours.Application, []},
-      extra_applications: [:ueberauth, :ueberauth_auth0, :logger, :runtime_tools, :timex],
+      extra_applications: [:ueberauth, :ueberauth_auth0, :logger, :runtime_tools, :timex]
     ]
   end
 

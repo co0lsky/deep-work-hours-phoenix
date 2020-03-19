@@ -23,11 +23,11 @@ defmodule DeepWorkHoursWeb.AuthController do
         |> put_flash(:info, "Successfully authenticated as " <> user.name <> ".")
         |> put_session(:current_user, user)
         |> redirect(to: "/")
+
       {:error, reason} ->
         conn
         |> put_flash(:error, reason)
         |> redirect(to: "/")
     end
   end
-
 end

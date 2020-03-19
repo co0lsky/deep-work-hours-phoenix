@@ -27,9 +27,9 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponent do
   end
 
   def handle_event("toggle", _params, socket) do
-    {:noreply, socket
-               |> assign(:hidden, !socket.assigns.hidden)
-    }
+    {:noreply,
+     socket
+     |> assign(:hidden, !socket.assigns.hidden)}
   end
 
   def handle_event("save", %{"time_entry" => params}, socket) do
@@ -37,18 +37,19 @@ defmodule DeepWorkHoursWeb.Components.EntryDetailComponent do
 
     entry
     |> DeepWorkHours.TimeEntry.changeset(params)
-    |> Repo.update
+    |> Repo.update()
     |> case do
       {:ok, entry} ->
         {:noreply,
-          socket
-          |> assign(:hidden, true)
-          |> assign(:entry, DeepWorkHours.TimeEntry.changeset(entry))}
+         socket
+         |> assign(:hidden, true)
+         |> assign(:entry, DeepWorkHours.TimeEntry.changeset(entry))}
+
       {:error, %Ecto.Changeset{} = changeset} ->
         {:noreply,
-          socket
-          |> assign(:hidden, true)
-          |> assign(:entry, changeset)}
-      end
+         socket
+         |> assign(:hidden, true)
+         |> assign(:entry, changeset)}
+    end
   end
 end
