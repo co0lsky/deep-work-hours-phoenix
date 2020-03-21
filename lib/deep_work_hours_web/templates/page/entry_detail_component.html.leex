@@ -14,6 +14,16 @@
         </div>
         <hr>
         <div class="px-2">
+          <%= if f.errors != [] do %>
+            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+              <p>Oops, something went wrong! Please check the errors below:</p>
+              <ul class="list-disc px-5">
+                <%= for {attr, {message, _}} <- f.errors do %>
+                  <li><strong><%= humanize(attr) %></strong> <%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
           <div class="flex flex-row pt-2 text-gray-700">
             <%= label f, :start_date_time, "Start:", class: "w-8 flex-none" %>
             <%= datetime_select f, :start_date_time, builder: fn b -> %>

@@ -35,3 +35,6 @@ npm-debug.log
 
 # The directory PHPStorm generates IDE related files
 /.idea
+
+# VS Code Extension related files
+/.elixir_ls

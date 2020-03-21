@@ -18,23 +18,23 @@ defmodule DeepWorkHours.TimeEntry do
   def changeset(entry, params \\ %{}) do
     entry
     |> cast(params, [:start_date_time, :end_date_time])
-    |> compare_date_time(:start_date_time, :end_date_time)
+    |> compare_date_time()
   end
 
   @doc """
-  Compare two DateTime being one after another
+  Compare start and end date time
 
   ## Examples
 
-      compare_date_time(changeset, :from, :to)
+      compare_date_time(changeset)
 
   """
-  def compare_date_time(changeset, from, to) do
-    {_, from_value} = fetch_field(changeset, from)
-    {_, to_value} = fetch_field(changeset, to)
+  def compare_date_time(changeset) do
+    {_, from_value} = fetch_field(changeset, :start_date_time)
+    {_, to_value} = fetch_field(changeset, :end_date_time)
 
     case DateTime.compare(from_value, to_value) do
-      :gt -> add_error(changeset, from, "cannot be later than End")
+      :gt -> add_error(changeset, :start_date_time, "cannot be later than End")
       _ -> changeset
     end
   end

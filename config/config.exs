@@ -38,7 +38,7 @@ config :elixir, :time_zone_database, Tzdata.TimeZoneDatabase
 # Configures Ueberauth
 config :ueberauth, Ueberauth,
   providers: [
-    auth0: { Ueberauth.Strategy.Auth0, [] },
+    auth0: {Ueberauth.Strategy.Auth0, []}
   ]
 
 # Import environment specific config. This must remain at the bottom
