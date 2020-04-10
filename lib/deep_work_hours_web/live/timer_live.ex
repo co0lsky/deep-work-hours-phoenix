@@ -72,7 +72,7 @@ defmodule DeepWorkHoursWeb.TimerLive do
   defp save_timer_entry(socket) do
     {:ok, end_time} = DateTime.now("Etc/UTC")
 
-    time_entry = %DeepWorkHours.TimeEntry{
+    time_entry = %{
       date: Date.utc_today(),
       start_date_time: DateTime.truncate(socket.assigns.start_time, :second),
       end_date_time: DateTime.truncate(end_time, :second),
@@ -80,6 +80,6 @@ defmodule DeepWorkHoursWeb.TimerLive do
       uid: socket.assigns.current_user.id
     }
 
-    DeepWorkHours.Repo.insert(time_entry)
+    DeepWorkHours.insert_entry(time_entry)
   end
 end
