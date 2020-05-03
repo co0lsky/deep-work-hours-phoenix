@@ -11,7 +11,9 @@ defmodule DeepWorkHours.Application do
       # Start the Ecto repository
       DeepWorkHours.Repo,
       # Start the endpoint when the application starts
-      DeepWorkHoursWeb.Endpoint
+      DeepWorkHoursWeb.Endpoint,
+      # Start the pubsub
+      {Phoenix.PubSub, [name: DeepWorkHours.PubSub, adapter: Phoenix.PubSub.PG2]}
       # Starts a worker by calling: DeepWorkHours.Worker.start_link(arg)
       # {DeepWorkHours.Worker, arg},
     ]

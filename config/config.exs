@@ -21,7 +21,7 @@ config :deep_work_hours, DeepWorkHoursWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "dwd3GuPH4bqgsdw97nDxtUco2iHn5sU0tAOxxD/+ijd9eRcVdEoRqJSWPOsqjopc",
   render_errors: [view: DeepWorkHoursWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: DeepWorkHours.PubSub, adapter: Phoenix.PubSub.PG2],
+  pubsub_server: DeepWorkHours.PubSub,
   live_view: [signing_salt: "z5p5SgXp"]
 
 # Configures Elixir's Logger
