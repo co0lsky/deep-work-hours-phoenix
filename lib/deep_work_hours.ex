@@ -32,6 +32,7 @@ defmodule DeepWorkHours do
     TimeEntry
     |> struct(attrs)
     |> @repo.insert()
+    |> broadcast(:entry_inserted)
   end
 
   def delete_entry(%TimeEntry{} = entry), do: @repo.delete(entry)
@@ -51,5 +52,17 @@ defmodule DeepWorkHours do
         select: %{id: t.id, day: t.date, total: t.total_time}
 
     @repo.all(query)
+  end
+
+  def subscribe do
+    Phoenix.PubSub.subscribe(DeepWorkHours.PubSub, "entries")
+  end
+
+  defp broadcast({:error, _reason} = error, _event), do: error
+
+  defp broadcast({:ok, entry}, event) do
+    Phoenix.PubSub.broadcast(DeepWorkHours.PubSub, "entries", {event, entry})
+
+    {:ok, entry}
   end
 end
